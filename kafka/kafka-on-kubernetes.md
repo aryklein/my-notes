@@ -192,7 +192,7 @@ spec:
 #        com.linkedin.kafka.cruisecontrol.analyzer.goals.DiskCapacityGoal,
 #        com.linkedin.kafka.cruisecontrol.analyzer.goals.CpuCapacityGoal
   ## Kafka exporter definition
-  kafkaExporter: (11)
+  kafkaExporter: (13)
     groupRegex: ".*"
     topicRegex: ".*"
     resources:
@@ -213,10 +213,10 @@ spec:
 #            value: bar
 #
   ## Zookeeper definition
-  zookeeper: (12)
+  zookeeper: (14)
     template:
       pod:
-        affinity: (13)
+        affinity: (15)
           podAntiAffinity:
             requiredDuringSchedulingIgnoredDuringExecution:
               - labelSelector:
@@ -236,17 +236,17 @@ spec:
                         values:
                           - kafka-cluster-zookeeper
                   topologyKey: "topology.kubernetes.io/zone"
-    replicas: 3 (14)
-    resources: (15)
+    replicas: 3 (16)
+    resources: (17)
       requests:
         memory: 1Gi
         cpu: "1"
-    storage: (16)
+    storage: (18)
       type: persistent-claim
       size: 10Gi
       deleteClaim: false
   ## Entity operator
-  entityOperator: (17)
+  entityOperator: (19)
     topicOperator: {}
     userOperator: {}
 ```
@@ -264,8 +264,11 @@ container registry or a customized image.
 - (8): Template customization. In this example, pods are scheduled with anti-affinity so the pods are not scheduled on
 nodes with the same hostname and preferably in different zones. Pods also have a customized annotation.
 - (9): Custom environment variables. Prefixed ENVs with `KAFKA_` are internal to Strimzi and should be avoided.
-- (10):
-- (10):
+- (10): Storage is configured as `ephemeral`, `persistent-claim` or `jbod` A Kafka cluster with JBOD storage. JBOD
+(Just a Bunch Of Disks) storage allows you to use multiple disks in each Kafka broker for storing commit logs. You can
+easily add more volumes just by editing the YAML and adding more volumes with differents IDs.
+- (11): Specifies the broker configuration. Standard Kafka configuration may be provided, restricted to those properties
+not managed directly by the operator. 
 
 ### Listeners
 
