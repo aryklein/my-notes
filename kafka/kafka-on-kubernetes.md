@@ -139,7 +139,7 @@ spec:
       pod:
         metadata:
           annotations:
-	    some/annotation: "true"
+            some/annotation: "true"
         affinity: 
           podAntiAffinity:
             requiredDuringSchedulingIgnoredDuringExecution:
@@ -206,7 +206,7 @@ spec:
       pod:
         metadata:
           annotations:
-	    some/annotation: "true"
+            some/annotation: "true"
 #      container:
 #        env:
 #          - name: foo
