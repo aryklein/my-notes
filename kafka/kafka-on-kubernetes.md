@@ -121,16 +121,14 @@ spec:
         tls: false
         authentication: (5)
           type: scram-sha-512
-      - name: tls
-        port: 9093
-        type: internal
-        tls: true
-        authentication:
-          type: tls
       - name: external
-        port: 9094
+        port: 9092
         type: nodeport
         tls: false
+        authentication:
+          type: scram-sha-512
+        configuration:
+          preferredNodePortAddressType: InternalIP
     authorization: (6)
       type: simple
       superUsers:
@@ -141,7 +139,7 @@ spec:
       pod:
         metadata:
           annotations:
-            some/annotation "true"
+	    some/annotation: "true"
         affinity: 
           podAntiAffinity:
             requiredDuringSchedulingIgnoredDuringExecution:
@@ -255,19 +253,27 @@ spec:
 
 - (1): The number of Kafka brokers. If your cluster already has topics defined, you can scale the cluster.
 - (2): Kafka version.
-- (3): Requests for reservation of supported resources, currently cpu and memory, and limits to specify the maximum
+- (3): Requests for reservation of supported resources, currently CPU and memory, and limits to specify the maximum
 resources that can be consumed.
-- (4): Listeners configure how clients connect to the Kafka cluster via bootstrap addresses. Listeners are configured
-as internal or external listeners for connection from inside or outside the Kubernetes cluster.
-- (5): Listener authentication mechanism
+- (4): Listeners configure how clients connect to the Kafka cluster via bootstrap addresses.
+- (5): Listener authentication mechanism.
 - (6): Configures authorization for Kafka brokers. For a list of supported authorization options, check
-[here](https://strimzi.io/docs/operators/latest/using.html#con-securing-kafka-authorization-str)
+[here](https://strimzi.io/docs/operators/latest/using.html#con-securing-kafka-authorization-str).
 - (7): Overrides Kafka container image. It's recommended only in special situations where you need to use a different
 container registry or a customized image.
 - (8): Template customization. In this example, pods are scheduled with anti-affinity so the pods are not scheduled on
 nodes with the same hostname and preferably in different zones. Pods also have a customized annotation.
-- (9): Custom environment variables. Prefixed ENVs with KAFKA_ are internal to Strimzi and should be avoided.
+- (9): Custom environment variables. Prefixed ENVs with `KAFKA_` are internal to Strimzi and should be avoided.
 - (10):
 - (10):
 
-(listeners): Listeners configure how clients connect to the Kafka cluster via bootstrap addresses. Listeners are configured as internal or external listeners for connection from inside or outside the Kubernetes cluster.
+### Listeners
+
+Listeners configure how clients connect to the Kafka cluster via bootstrap addresses. Listeners are configured as
+internal or external listeners for connection from inside or outside the Kubernetes cluster. Each listener is defined
+as an array in the Kafka resource. You can configure as many listeners as required, as long as their names and ports are
+unique.
+
+The listener `type` could be set as `internal` for clients running in the same Kubernetes cluster or `route`,
+`loadbalancer`, `nodeport` and `ingress` for external clients that run outside the Kubernetes cluster. More information
+[here](https://strimzi.io/docs/operators/latest/using.html#type-GenericKafkaListener-reference).
