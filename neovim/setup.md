@@ -41,7 +41,7 @@ a complete list of plugins that I'm using. The following plugins are my recommen
 
 - `gruvbox-community/gruvbox`: theme with pastel 'retro groove' colors.
 - `hashivim/vim-terraform`: adds a `:Terraform` command that runs `terraform`, with tab completion of subcommands. It
-also sets up *.hcl, *.tf, *.tfvars, .terraform.rc*  and *terraform.rc* files to be highlighted as HCL and *.tfstate* as JSON.
+also sets up *.hcl*, *.tf*, *.tfvars*, *.terraform.rc*  and *terraform.rc* files to be highlighted as HCL and *.tfstate* as JSON.
 - `pearofducks/ansible-vim`: syntax plugin for Ansible.
 - `preservim/nerdtree`: a file system explorer.
 - `ryanoasis/vim-devicons`: add icons to the plugins.
