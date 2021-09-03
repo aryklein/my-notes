@@ -29,7 +29,7 @@ call plug#end()
 After adding the above to the top of your Neovim configuration file, reload it (`:source ~/.config/nvim/init.vim`) or
 restart Neovim. Now run `:PlugInstall` to install the plugins.
 
-To unisntall a plugin, just remove it or comment out from the configuration file, reload Neovim and execute
+To uninstall a plugin, just remove it or comment out from the configuration file, reload Neovim and execute
 `:PlugClean`.
 
 To update all plugins run `:PlugUpdate`.
