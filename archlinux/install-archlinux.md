@@ -352,7 +352,7 @@ Install the following packages and configure them thru the `Gnome Tweaks`:
 - nerd-fonts-noto-sans-mono (AUR)
 
 
-.. image:: ../images/gnome-fonts.png
+![gnome-fonts](../images/gnome-fonts.png)
 
 ### Icons
 
