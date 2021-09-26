@@ -214,7 +214,8 @@ pacman -S openssh \
 	  ntfs-3g \
 	  fzf \
 	  fd \
-	  ripgrep 
+	  ripgrep \
+	  stow
 ```
 
 ### Mirror List
