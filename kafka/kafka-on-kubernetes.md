@@ -1,34 +1,44 @@
 # Kafka on Kubernetes with Strimzi
 
-Kafka uses Zookeeper to manage the cluster. Zookeeper is used to coordinate the brokers/cluster topology. Zookeeper is
-a consistent file system for configuration information. It gets used for leadership election for brokers, topicsa and
-partitions.
+Kafka uses Zookeeper to manage the cluster. ZooKeeper is primarily used to track the status of the nodes in the Kafka
+cluster and maintain a list of Kafka topics and messages. 
 
-Deploying a Kafka cluster is not difficult but maintaining a cluster could be. 
+When working with Kafka, ZooKeeper has five primary functions:
+
+- Controller election: controller is the broker responsible for maintaining the leader/follower relationship for all
+partitions. If ever a node shuts down, ZooKeeper ensures that other replicas take up the role of partition leaders 
+replacing the partition leaders in the node that is shutting down.
+- Cluster membership: ZooKeeper keeps a list of all working brokers in the cluster.
+- Topic configuration: ZooKeeper maintains the configuration of all topics, including the list of existing topics,
+number of partitions for each topic, location of the replicas, etc.
+- Access control lists: ZooKeeper also maintains the ACLs for all topics.  This includes who or what is allowed to
+read/write to each topic, list of consumer groups, members of the groups, and the most recent offset each consumer
+group received from each partition.
+- Quotas: ZooKeeper manages how much data each client is allowed to read/write.
 
 ## Running Kafka without automation
 
-If you want to deploy a Kafka cluster, at glance you should follow these steps:
+Deploying a Kafka cluster, involves the follow these steps:
 
 - Setting up a ZooKeeper ensemble:
     - Create a data directory for Zookeeper.
     - Download and extract the Zookeeper binaries.
     - In the config file of all instances, specify the zookeeper servers that will be part of the ensemble.
-    - set a different node ID in every node.
+    - set a different ZK IDs in every node.
 - Setting up a Kafka cluster:
     - Download and extract the Kafka binaries in all nodes.
-    - configure a different `broker.id` in every node.
-    - Set same `zookeeper.connect` property on all nodes with a comma-separated string listing the IP addresses and
-ports numbers of all the ZooKeeper instances.
+    - Configure a different `broker.id` in every node.
+    - Set same `zookeeper.connect` on all nodes with a comma-separated string, listing the IP addresses and ports
+numbers of all the ZooKeeper instances.
 
 ## Running Kafka on Docker containers
 
 You can simplify the deployment of a Kafka cluster by using the Kafka and Zookeeper Docker images from Bitnami:
 
-- https://github.com/bitnami/bitnami-docker-kafka
-- https://github.com/bitnami/bitnami-docker-zookeeper
+- [kafka](https://github.com/bitnami/bitnami-docker-kafka)
+- [zookeeper](https://github.com/bitnami/bitnami-docker-zookeeper)
 
-A simple example using Docker Compose:
+A simple example using docker-compose:
 
 ```yaml
 version: '2'
@@ -63,15 +73,16 @@ services:
       - ALLOW_PLAINTEXT_LISTENER=yes
 ```
 
-This setup runs all brokers and Zookeeper in the same host. It could work for testing. Moving this setup to production
-(using multiple servers) could involve some Ansible work.
+This setup runs all Kafka brokers and Zookeeper in the same host. It could work for testing but moving this setup to
+production (using multiple servers) could involve some automation work.
 
 ## Running Kafka on Kubernetes
 
 The steps mentioned above are good options, but they require a lot of work on automation and maintenance. A good option
 to avoid a headache is to run Kafka in Kubernetes cluster with the help of an operator. 
 
-At the time of writting this document, [Strimzi](https://strimzi.io) operator seems to be the most mature and complete.
+At the time of writting this document, [Strimzi](https://strimzi.io) operator seems to be the most mature and complete
+project.
 
 This operators simplify the process of:
 
@@ -95,8 +106,8 @@ Follow this [document](https://github.com/aryklein/my-notes/blob/main/kafka/stri
 
 ### Deploying a Kafka cluster
 
-In this section I will show you an example about how to create a Kafka cluster with 3 brokers and 3 Zookeeper nodes. If
-you want to delve into the subject, I strongy recommend to read the
+This section will show an example about how to create a Kafka cluster with 3 brokers and 3 Zookeeper nodes. If you want
+to delve into the subject, I strongy recommend to read the
 [official documentation](https://strimzi.io/docs/operators/latest/using.html).
 
 ```yaml
@@ -264,11 +275,22 @@ container registry or a customized image.
 - (8): Template customization. In this example, pods are scheduled with anti-affinity so the pods are not scheduled on
 nodes with the same hostname and preferably in different zones. Pods also have a customized annotation.
 - (9): Custom environment variables. Prefixed ENVs with `KAFKA_` are internal to Strimzi and should be avoided.
-- (10): Storage is configured as `ephemeral`, `persistent-claim` or `jbod` A Kafka cluster with JBOD storage. JBOD
-(Just a Bunch Of Disks) storage allows you to use multiple disks in each Kafka broker for storing commit logs. You can
-easily add more volumes just by editing the YAML and adding more volumes with differents IDs.
+- (10): Storage is configured as `ephemeral`, `persistent-claim` or `jbod` A Kafka cluster with JBOD storage (Just a 
+Bunch Of Disks) storage allows you to use multiple disks in each Kafka broker for storing commit logs. You can easily 
+add more volumes just by editing the YAML and adding more volumes with differents IDs.
 - (11): Specifies the broker configuration. Standard Kafka configuration may be provided, restricted to those properties
 not managed directly by the operator. 
+- (12): Optional configuration for Cruise Control, which is used to rebalance the Kafka cluster.
+- (13): Prometheus exporter for extracting metrics from Kafka brokers, in particular consumer lag data.
+- (14): ZooKeeper specific configuration, which contains properties similar to the Kafka configuration.
+- (15): Affinity rules for for Zookeeper pods.
+- (16): Number of ZooKeeper nodes. ZooKeeper ensembles usually run with an odd number of nodes, typically three, five,
+or seven.
+- (17): Requests for reservation of supported resources for Zookeeper pods, currently CPU and memory, and limits to
+specify the maximum resources that can be consumed.
+- (18): ZooKeeper needs to store data on disk. Supported types: `ephemeral` and `persistent-claim`. `jbod` storage is 
+supported only for Kafka, not for ZooKeeper.
+- (19): Entity Operator configurationr, which specifies the configuration for the Topic Operator and User Operator.
 
 ### Listeners
 
@@ -280,3 +302,14 @@ unique.
 The listener `type` could be set as `internal` for clients running in the same Kubernetes cluster or `route`,
 `loadbalancer`, `nodeport` and `ingress` for external clients that run outside the Kubernetes cluster. More information
 [here](https://strimzi.io/docs/operators/latest/using.html#type-GenericKafkaListener-reference).
+
+## Cruise Control
+
+Cruise Control is an open source project from Linkedin, that automates the balancing of load across a Kafka cluster.
+You can check the official site [here](https://github.com/linkedin/cruise-control).
+
+Strimzi provides native Cruise Control support. You can learn how to use it from this
+[blog post](https://strimzi.io/blog/2020/06/15/cruise-control/)
+
+
+
