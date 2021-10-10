@@ -215,7 +215,8 @@ pacman -S openssh \
 	  fzf \
 	  fd \
 	  ripgrep \
-	  stow
+	  stow \
+          bat
 ```
 
 ### Mirror List
@@ -424,5 +425,15 @@ Reboot and check:
 
 ```bash
 iw reg get
+```
+
+## Printers
+
+Install `cups` and `system-config-printer`, add your user to the `lp` group, and start the cups service and logout/login
+to assign your user to the `lp` group:
+
+```bash
+sudo pacman -S cups system-config-printer
+sudo systemctl start cups
 ```
 
