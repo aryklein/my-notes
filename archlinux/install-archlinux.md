@@ -29,7 +29,7 @@ timedatectl set-ntp true
 
 ### Partition and format the disk
 
-In my case I use `fdisk` but you can use `parted`. 
+In my case I use `fdisk` but you can use `parted`.
 
 ```bash
 fdisk /dev/the_disk_to_be_partitioned
@@ -129,7 +129,7 @@ echo "LANG=en_US.UTF-8" > /etc/locale.conf
 
 7) Set the keyboard layout:
 
-```bash 
+```bash
 echo "KEYMAP=us" > /etc/vconsole.conf
 ```
 
@@ -162,7 +162,7 @@ passwd root
 12) Install a boot loader (in my case GRUB) and microcode:
 
 ```bash
-pacman -S grub efibootmgr os-prober intel-ucode 
+pacman -S grub efibootmgr os-prober intel-ucode
 grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=arch_grub
 grub-mkconfig -o /boot/grub/grub.cfg
 ```
@@ -304,7 +304,7 @@ ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 
 ### Gnome extensions
 
-To manage Gnome extensions from Firefox, install `chrome-gnome-shell` from the AUR. These are the extensions that I 
+To manage Gnome extensions from Firefox, install `chrome-gnome-shell` from the AUR. These are the extensions that I
 usually use:
 
 - AppIndicator and KStatusNotifierItem Support (this extension needs `libappindicator-gtk3`).
@@ -326,7 +326,7 @@ sudo pacman -S hunspell-en_US
 
 I usually install the following packages after installing Gnome:
 
-- google-chrome (AUR)
+- brave-bin (AUR)
 - chrome-gnome-shell (AUR)
 - firefox
 - kitty
@@ -342,6 +342,9 @@ before installing `dropbox` package and install `python-gpgme`.
 - visual-studio-code-bin (AUR)
 - gimp
 - obs-studio
+- youtube-dl
+- github-cli
+- mpv
 
 ### Fonts
 
@@ -388,13 +391,13 @@ More info [here](https://wiki.archlinux.org/title/Hardware_video_acceleration)
 ## Pipewire
 
 Pipewire is a new low-level multimedia framework. It aims to offer capture and playback for both audio and video with
-minimal latency and support for PulseAudio, JACK, ALSA and GStreamer-based applications. It replaces PlulseAudio. You 
+minimal latency and support for PulseAudio, JACK, ALSA and GStreamer-based applications. It replaces PlulseAudio. You
 can check if your system is using it with:
 
 ```bash
 $ pactl info
 ```
-  
+
 If it says `Server Name: PulseAudio (on PipeWire 0.3.32)` it means it's already installed.
 
 **Install Pipewire (Optional)**
@@ -436,4 +439,3 @@ to assign your user to the `lp` group:
 sudo pacman -S cups system-config-printer
 sudo systemctl start cups
 ```
-
