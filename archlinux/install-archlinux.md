@@ -345,6 +345,7 @@ before installing `dropbox` package and install `python-gpgme`.
 - youtube-dl
 - github-cli
 - mpv
+- paru (AUR) - AUR helper
 
 ### Fonts
 
