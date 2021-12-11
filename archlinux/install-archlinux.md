@@ -190,7 +190,7 @@ Install the following basic packages:
 pacman -Syu
 pacman -S openssh \
           bash-completion \
-	  nvim \
+	  neovim \
 	  man-db \
 	  man-pages \
 	  base-devel \
