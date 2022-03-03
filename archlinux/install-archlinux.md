@@ -216,7 +216,8 @@ pacman -S openssh \
 	  fd \
 	  ripgrep \
 	  stow \
-          bat
+          bat \
+	  exa
 ```
 
 ### Mirror List
@@ -346,6 +347,7 @@ before installing `dropbox` package and install `python-gpgme`.
 - github-cli
 - mpv
 - paru (AUR) - AUR helper
+- android-udev
 
 ### Fonts
 
