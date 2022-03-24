@@ -30,10 +30,23 @@ sudo usermod -a -G libvirt <user>
 ```
 ## Running VMs
 
-In NAT network mode, you need to define and start a network in libvirt. By default `libvirt` has a
-network defined in `/etc/libvirt/qemu/networks/default.xml`. You can use it by running:
+If you use the NAT network mode, you will need to define and start a network in libvirt. By default
+`libvirt` has a network defined in `/etc/libvirt/qemu/networks/default.xml`. You can use it by running:
 
 ```bash
 sudo virsh
+```
+
+Then in the `virsh` CLI you can start it by:
+
+```
 virsh # net-start default
+```
+
+Alternatively, if you want to have it enabled by default every time you start the `libvirtd` service,
+you can run:
+
+```
+virsh # net-start default
+virsh # net-autostart default
 ```
