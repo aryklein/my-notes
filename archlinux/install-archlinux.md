@@ -272,6 +272,10 @@ systemctl enable NetworkManager
 systemctl enable bluetooth
 ```
 
+**Note**: if you don't use GDM I notice that by default the Bluetooth adapter does not
+power on after boot. If you have issues with this, set `AutoEnable=true` in
+`/etc/bluetooth/main.conf` in the `[Policy]` section.
+
 Enable **H.264** for Gnome videos:
 
 ```bash
