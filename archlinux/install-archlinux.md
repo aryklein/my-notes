@@ -361,6 +361,8 @@ Install the following packages and configure them thru the `Gnome Tweaks tool`:
 - ttf-hack
 - ttf-liberation
 - ttf-opensans
+- ttf-roboto
+- ttf-roboto-mono
 - noto-fonts
 - noto-fonts-emoji
 - nerd-fonts-dejavu-complete (AUR)
