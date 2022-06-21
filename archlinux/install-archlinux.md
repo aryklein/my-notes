@@ -191,6 +191,8 @@ pacman -Syu
 pacman -S openssh \
           bash-completion \
 	  neovim \
+	  gopls \
+	  pyright \
 	  man-db \
 	  man-pages \
 	  base-devel \
