@@ -171,16 +171,22 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 14) Setup the network interface to have access to the Internet. I set it manually by using `iproute2`.
 
-15) Install `sudo` package, create a user and add it to the `wheel` group:
+15) Install `doas` package, create a user and add it to the `wheel` group:
 
 ```bash
-pacman -S sudo
+pacman -S doas
 useradd -m -c "Ary Kleinerman" -s /bin/bash ary
 passwd ary
 gpasswd -a ary wheel
 ```
 
-16) Edit the `/etc/sudoers` file and uncomment the group `wheel`.
+16) Create the `/etc/doas.conf` file and fix the permissions:
+
+```bash
+echo "permit nopass :wheel" > /etc/doas.conf
+chown -c root:root /etc/doas.conf
+chmod -c 0400 /etc/doas.conf
+```
 
 ### Install basic packages
 
