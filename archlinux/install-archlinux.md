@@ -195,6 +195,7 @@ Install the following basic packages:
 ```bash
 pacman -Syu
 pacman -S openssh \
+          linux-firmware \
           bash-completion \
 	  neovim \
 	  gopls \
