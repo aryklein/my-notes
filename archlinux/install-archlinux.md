@@ -397,10 +397,13 @@ type in [Firefox](https://addons.mozilla.org/en-us/firefox/language-tools/)
 Hardware video acceleration makes it possible for the video card to decode/encode video, thus offloading the CPU and
 saving power.
 
+- HD Graphics series starting from Broadwell (2014) and newer are supported by `intel-media-driver`.
+- GMA 4500 (2008) and newer GPUs, including HD Graphics up to Coffee Lake (2017) are supported by `libva-intel-driver`.
+
 Install the following packages:
 
 ```bash
-pacman -S libva-utils libva-intel-driver
+pacman -S libva-utils [intel-media-driver|libva-intel-driver]
 ```
 
 More info [here](https://wiki.archlinux.org/title/Hardware_video_acceleration)
