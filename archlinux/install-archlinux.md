@@ -195,6 +195,8 @@ Install the following basic packages:
 ```bash
 pacman -Syu
 pacman -S openssh \
+          # intel-ucode for intel amd-ucode for AMD \
+	  intel-ucode \
           linux-firmware \
           bash-completion \
 	  neovim \
