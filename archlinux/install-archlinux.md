@@ -228,7 +228,9 @@ pacman -S openssh \
 	  ripgrep \
 	  stow \
           bat \
-	  exa
+	  exa \
+	  usbutils \
+	  mtpfs
 ```
 
 ### Mirror List
