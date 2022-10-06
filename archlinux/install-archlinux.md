@@ -264,7 +264,13 @@ pacman -S openssh \
           bat \
 	  exa \
 	  usbutils \
-	  mtpfs
+	  mtpfs \
+	  bluez \
+	  bluez-utils \
+	  pipewire \
+	  pipewire-{alsa,jack,pulse} \
+	  wireplumber
+	  
 ```
 
 ### Mirror List
@@ -273,8 +279,8 @@ Generate a good mirror list file (`/etc/pacman.d/mirrorlist`) by using the onlin
 [generator](https://www.archlinux.org/mirrorlist/) or using `reflector`:
 
 ```bash
-sudo reflector -c 'United States' -c Canada --latest 5 --protocol https --save /etc/pacman.d/mirrorlist
-sudo pacman -Syu
+doas reflector -c 'United States' -c Canada --latest 5 --protocol https --save /etc/pacman.d/mirrorlist
+doas pacman -Syu
 ```
 
 ### Colored pacman
@@ -283,19 +289,19 @@ Uncomment the `Color` line in `/etc/pacman.conf`.
 
 ### Docker and docker-compose
 
-Install the following packages:
+Add your user to the docker group:
 
 ```bash
-sudo pacman -S docker docker-compose
-sudo usermod -aG docker <user>
+doas systemct start docker
+doas usermod -aG docker <user>
 ```
 
-### Colordiff
+### Colorized files
 
 To have colorized files according to the extension, generate `/etc/DIR_COLORS` with:
 
 ```bash
-dircolors -p | sudo tee /etc/DIR_COLORS
+dircolors -p | doas tee /etc/DIR_COLORS
 ```
 
 ## Installing Gnome
