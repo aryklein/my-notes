@@ -295,6 +295,12 @@ doas systemct start docker
 doas usermod -aG docker <user>
 ```
 
+### Enable bluetooth service
+
+```bash
+doas systemctl enable bluetooth
+```
+
 ### Colorized files
 
 To have colorized files according to the extension, generate `/etc/DIR_COLORS` with:
@@ -522,7 +528,6 @@ SWAYWM
 
 non-aur packages
 ```bash
-cat tmp 
 doas pacman -S sway \
 wofi \
 waybar \
@@ -560,7 +565,11 @@ noto-fonts \
 noto-fonts-emoji
 
 ```
+
+
 WITH PARU:
 
 ```
 wob
+nerd-fonts-dejavu-complete
+nerd-fonts-noto-sans-mono 
