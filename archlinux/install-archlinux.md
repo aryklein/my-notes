@@ -19,6 +19,22 @@ Replace `release_date` with the proper relase date and `pendrive` with the mappe
 
 On most Dell laptops, you can choose this option by pressing *F12* key at boot time.
 
+### Connect to WiFi on Arch Linux installer
+
+```bash
+iwctl
+[iwd]# device list
+...
+[iwd]# station wlan0 scan
+[iwd]# station wlan0 get-networks
+...
+[iwd]# station connect some-wifi-network
+[iwd]# station wlan0 show
+...
+[iwd]# exit
+ping www.google.com
+```
+
 ### Update the system clock
 
 Use `timedatectl` to ensure the system clock is accurate by enabling NTP:
