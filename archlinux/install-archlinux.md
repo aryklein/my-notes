@@ -223,14 +223,13 @@ systemctl enable networkmanager
 
 ### Install basic packages
 
+(**note**: `intel-ucode` for intel `amd-ucode` for AMD)
+
 Install the following basic packages:
 
 ```bash
 pacman -Syu
-pacman -S openssh \
-          polkit \
-          # intel-ucode for intel amd-ucode for AMD \
-	  intel-ucode \
+pacman -S intel-ucode \
           linux-firmware \
           bash-completion \
 	  neovim \
@@ -269,8 +268,8 @@ pacman -S openssh \
 	  bluez-utils \
 	  pipewire \
 	  pipewire-{alsa,jack,pulse} \
-	  wireplumber
-	  
+	  wireplumber \
+	  kitty
 ```
 
 ### Mirror List
@@ -302,6 +301,20 @@ To have colorized files according to the extension, generate `/etc/DIR_COLORS` w
 
 ```bash
 dircolors -p | doas tee /etc/DIR_COLORS
+```
+### Paru as AUR helper
+
+Paru will be used to install AUR packages:
+
+```
+# set yo makepkg to use doas
+echo PACMAN_AUTH=(doas) | doas tee -a /etc/makepkg.conf
+git clone https://aur.archlinux.org/paru.git
+cd paru
+makepkg -s
+doas pacman -U paru-xxx
+cd ..
+rm -rf paru
 ```
 
 ## Installing Gnome
@@ -504,3 +517,50 @@ to assign your user to the `lp` group:
 sudo pacman -S cups system-config-printer
 sudo systemctl start cups
 ```
+
+SWAYWM
+
+non-aur packages
+```bash
+cat tmp 
+doas pacman -S sway \
+wofi \
+waybar \
+blueberry \
+xdg-desktop-portal \
+xdg-desktop-portal-wlr \
+khal \
+pavucontrol \
+foot \
+swaylock \
+light \
+alacritty \
+grim \
+slurp \
+lxappearance \
+pcmanfm-gtk3 \
+qt5ct \
+qt5-wayland \
+qt6-wayland \
+lm_sensors \
+swayidle \
+swaybg \
+mako \
+flameshot \
+pulsemixer \
+qalculate-gtk \
+gnome-keyring \
+ttf-dejavu \
+ttf-hack \
+ttf-liberation \
+ttf-opensans \
+ttf-roboto \
+ttf-roboto-mono \
+noto-fonts \
+noto-fonts-emoji
+
+```
+WITH PARU:
+
+```
+wob
