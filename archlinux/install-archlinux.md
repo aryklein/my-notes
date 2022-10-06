@@ -182,12 +182,22 @@ pacman -S grub efibootmgr os-prober intel-ucode
 grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=arch_grub
 grub-mkconfig -o /boot/grub/grub.cfg
 ```
+13) Install the following packages before rebooting:
 
-13) Exit the chroot environment, umount mounted partitions and reboot.
+```bash
+pacman -S openssh \
+          polkit \
+	  networkmanager
+systemctl enable openssh
+systemctl enable NetworkManager
+```
 
-14) Setup the network interface to have access to the Internet. I set it manually by using `iproute2`.
 
-15) Install `doas` package, create a user and add it to the `wheel` group:
+14) Exit the chroot environment, umount mounted partitions and reboot.
+
+15) Setup the network interface to have access to the Internet. You can use `nmtui`.
+
+16) Install `doas` package, create a user and add it to the `wheel` group:
 
 ```bash
 pacman -S doas
@@ -196,12 +206,19 @@ passwd ary
 gpasswd -a ary wheel
 ```
 
-16) Create the `/etc/doas.conf` file and fix the permissions:
+17) Create the `/etc/doas.conf` file and fix the permissions:
 
 ```bash
 echo "permit nopass :wheel" > /etc/doas.conf
 chown -c root:root /etc/doas.conf
 chmod -c 0400 /etc/doas.conf
+```
+
+### Install NetworkManager
+
+```bash
+pacman -S networkmanager
+systemctl enable networkmanager
 ```
 
 ### Install basic packages
@@ -211,6 +228,7 @@ Install the following basic packages:
 ```bash
 pacman -Syu
 pacman -S openssh \
+          polkit \
           # intel-ucode for intel amd-ucode for AMD \
 	  intel-ucode \
           linux-firmware \
