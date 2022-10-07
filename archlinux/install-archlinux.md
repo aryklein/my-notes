@@ -403,12 +403,32 @@ cups \
 system-config-printer \
 nautilus \
 eog \
-python-gpgme (for dropbox?)
+libappindicator-gtk3 \
+gtk4
+go \
+gopls \
+pyright \
+xorg-xwayland \
+gnome-themes-extra
+```
+
+Add your user to the video group to manage screen brightness:
+
+```bash
+doas gpasswd -a <user> video
 ```
 
 Install the following AUR packages:
 
-you need to execute `gpg --recv-keys 1C61A2656FB57B7E4DE0F4C1FC918B335044912E` for Dropbox
+You need to execute:
+
+```bash
+# for Dropbox
+gpg --recv-keys 1C61A2656FB57B7E4DE0F4C1FC918B335044912E
+# for spotify
+curl -sS https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg | gpg --import -
+# for wob
+gpg --keyserver keys.openpgp.org --receive-keys 5C6DA024DDE27178073EA103F4B432D5D67990E3
 
 ```bash
 paru -S visual-studio-code-bin \
@@ -427,77 +447,6 @@ paru -S visual-studio-code-bin \
 	wob \
 	ansible-language-server
 ```
-
-
-
-### LibreOffice
-
-Install Libre Office package and the spelling corrector:
-
-```bash
-sudo pacman -S libreoffice-still
-sudo pacman -S hunspell-es_ar
-sudo pacman -S hunspell-en_US
-```
-
-### Extra packages
-
-I usually install the following packages after installing Gnome:
-
-- brave-bin (AUR)
-- chrome-gnome-shell (AUR)
-- firefox
-- kitty
-- zsh-theme-powerlevel10k-git (AUR)
-- kubectl
-- libreoffice-still
-- dropbox (AUR) - you need to execute `gpg --recv-keys 1C61A2656FB57B7E4DE0F4C1FC918B335044912E`
-before installing `dropbox` package and install `python-gpgme`.
-- nautilus-dropbox (AUR)
-- slack-desktop (AUR)
-- teamviewer (AUR)
-- zoom
-- visual-studio-code-bin (AUR)
-- gimp
-- obs-studio
-- youtube-dl
-- github-cli
-- mpv
-- paru (AUR) - AUR helper
-- android-udev
-
-### Fonts
-
-Install the following packages and configure them thru the `Gnome Tweaks tool`:
-
-- ttf-dejavu
-- ttf-hack
-- ttf-liberation
-- ttf-opensans
-- ttf-roboto
-- ttf-roboto-mono
-- noto-fonts
-- noto-fonts-emoji
-
-
-- nerd-fonts-dejavu-complete (AUR)
-- nerd-fonts-noto-sans-mono (AUR)
-
-![gnome-fonts](../images/gnome-fonts.png)
-
-### Icons
-
-Install `papirus-icon-theme` and enable it thru the `Gnome Tweak Tool`.
-
-### Keyboard
-
-To have accents in your English keyboard, go to **Settings** ➜ **Keyboard** and add **English (intl., with AltGr dead keys)** to
-the Input Sources.
-
-### Firefox
-
-Installing a dictionary add-on will add a new language option to your spell-checker, which checks your spelling as you
-type in [Firefox](https://addons.mozilla.org/en-us/firefox/language-tools/)
 
 ## Hardware video acceleration
 
@@ -543,63 +492,3 @@ Reboot and check:
 ```bash
 iw reg get
 ```
-
-## Printers
-
-Install `cups` and `system-config-printer`, add your user to the `lp` group, and start the cups service and logout/login
-to assign your user to the `lp` group:
-
-```bash
-sudo pacman -S cups system-config-printer
-sudo systemctl start cups
-```
-
-SWAYWM
-
-non-aur packages
-```bash
-doas pacman -S sway \
-wofi \
-waybar \
-blueberry \
-xdg-desktop-portal \
-xdg-desktop-portal-wlr \
-khal \
-pavucontrol \
-foot \
-swaylock \
-light \
-alacritty \
-grim \
-slurp \
-lxappearance \
-pcmanfm-gtk3 \
-qt5ct \
-qt5-wayland \
-qt6-wayland \
-lm_sensors \
-swayidle \
-swaybg \
-mako \
-flameshot \
-pulsemixer \
-qalculate-gtk \
-gnome-keyring \
-ttf-dejavu \
-ttf-hack \
-ttf-liberation \
-ttf-opensans \
-ttf-roboto \
-ttf-roboto-mono \
-noto-fonts \
-noto-fonts-emoji
-
-```
-
-
-WITH PARU:
-
-```
-wob
-nerd-fonts-dejavu-complete
-nerd-fonts-noto-sans-mono 
