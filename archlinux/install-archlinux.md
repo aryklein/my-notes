@@ -429,6 +429,7 @@ gpg --recv-keys 1C61A2656FB57B7E4DE0F4C1FC918B335044912E
 curl -sS https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg | gpg --import -
 # for wob
 gpg --keyserver keys.openpgp.org --receive-keys 5C6DA024DDE27178073EA103F4B432D5D67990E3
+```
 
 ```bash
 paru -S visual-studio-code-bin \
