@@ -188,10 +188,8 @@ grub-mkconfig -o /boot/grub/grub.cfg
 pacman -S openssh \
           polkit \
 	  networkmanager
-systemctl enable openssh
 systemctl enable NetworkManager
 ```
-
 
 14) Exit the chroot environment, umount mounted partitions and reboot.
 
@@ -201,6 +199,9 @@ systemctl enable NetworkManager
 
 ```bash
 pacman -S doas
+cd /usr/bin
+ln -s doas sudo
+cd ~
 useradd -m -c "Ary Kleinerman" -s /bin/bash ary
 passwd ary
 gpasswd -a ary wheel
@@ -212,13 +213,6 @@ gpasswd -a ary wheel
 echo "permit nopass :wheel" > /etc/doas.conf
 chown -c root:root /etc/doas.conf
 chmod -c 0400 /etc/doas.conf
-```
-
-### Install NetworkManager
-
-```bash
-pacman -S networkmanager
-systemctl enable networkmanager
 ```
 
 ### Install basic packages
@@ -269,7 +263,8 @@ pacman -S intel-ucode \
 	  pipewire \
 	  pipewire-{alsa,jack,pulse} \
 	  wireplumber \
-	  kitty
+	  kitty \
+	  gst-libav
 ```
 
 ### Mirror List
@@ -301,6 +296,10 @@ doas usermod -aG docker <user>
 doas systemctl enable bluetooth
 ```
 
+**Note**: if you don't use GDM I notice that by default the Bluetooth adapter does not
+power on after boot. If you have issues with this, set `AutoEnable=true` in
+`/etc/bluetooth/main.conf` in the `[Policy]` section.
+
 ### Colorized files
 
 To have colorized files according to the extension, generate `/etc/DIR_COLORS` with:
@@ -323,37 +322,6 @@ cd ..
 rm -rf paru
 ```
 
-## Installing Gnome
-
-Install the following packages:
-
-```bash
-pacman -S gnome gnome-extra \
-          networkmanager \
-	  bluez-utils \
-	  gnome-tweak-tool
-```
-
-*Note: as I usually do these tasks thru an SSH session, I use tmux.*
-
-After Gnome is installed, enable the following services:
-
-```bash
-systemctl enable gdm
-systemctl enable NetworkManager
-systemctl enable bluetooth
-```
-
-**Note**: if you don't use GDM I notice that by default the Bluetooth adapter does not
-power on after boot. If you have issues with this, set `AutoEnable=true` in
-`/etc/bluetooth/main.conf` in the `[Policy]` section.
-
-Enable **H.264** for Gnome videos:
-
-```bash
-sudo pacman -S gst-libav
-```
-
 ### NetworkManager setup with systemd-resolved**
 
 1) Remove `/etc/resolv.conf`.
@@ -374,20 +342,93 @@ dns=systemd-resolved
 4) Make `/etc/resolv.conf` to be a symlink to `/run/systemd/resolve/stub-resolv.conf`:
 
 ```bash
-ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+doas ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 ```
 
 5) Reboot.
 
-### Gnome extensions
+### Swaywm
 
-To manage Gnome extensions from Firefox, install `chrome-gnome-shell` from the AUR. These are the extensions that I
-usually use:
+Install the following non-AUR packages:
 
-- AppIndicator and KStatusNotifierItem Support (this extension needs `libappindicator-gtk3`).
-- Frippery Move Clock.
-- Gnome 40 UI Improvements.
-- Dash to Dock ➜ from AUR `gnome-shell-extension-dash-to-dock`.
+```bash
+doas pacman -S sway \
+wofi \
+waybar \
+blueberry \
+xdg-desktop-portal \
+xdg-desktop-portal-wlr \
+khal \
+pavucontrol \
+foot \
+swaylock \
+light \
+alacritty \
+grim \
+slurp \
+lxappearance \
+pcmanfm-gtk3 \
+qt5ct \
+qt5-wayland \
+qt6-wayland \
+lm_sensors \
+swayidle \
+swaybg \
+mako \
+flameshot \
+pulsemixer \
+qalculate-gtk \
+gnome-keyring \
+ttf-dejavu \
+ttf-hack \
+ttf-liberation \
+ttf-opensans \
+ttf-roboto \
+ttf-roboto-mono \
+noto-fonts \
+noto-fonts-emoji \
+libreoffice-still \
+hunspell-es_ar \
+hunspell-en_US \
+firefox \
+kubectl \
+gimp \
+obs-studio \
+youtube-dl \
+github-cli \
+mpv \
+android-udev \
+papirus-icon-theme \
+cups \
+system-config-printer \
+nautilus \
+eog \
+python-gpgme (for dropbox?)
+```
+
+Install the following AUR packages:
+
+you need to execute `gpg --recv-keys 1C61A2656FB57B7E4DE0F4C1FC918B335044912E` for Dropbox
+
+```bash
+paru -S visual-studio-code-bin \
+        brave-bin \
+        zsh-theme-powerlevel10k-git \
+        dropbox \
+        nautilus-dropbox \
+        teamviewer \
+	zoom \
+	nerd-fonts-dejavu-complete \
+	nerd-fonts-noto-sans-mono \
+	aws-cli-v2-bin \
+	slack-electron \
+	spotify \
+	tfswitch-bin \
+	wob \
+	ansible-language-server
+```
+
+
 
 ### LibreOffice
 
@@ -437,6 +478,8 @@ Install the following packages and configure them thru the `Gnome Tweaks tool`:
 - ttf-roboto-mono
 - noto-fonts
 - noto-fonts-emoji
+
+
 - nerd-fonts-dejavu-complete (AUR)
 - nerd-fonts-noto-sans-mono (AUR)
 
@@ -475,8 +518,7 @@ More info [here](https://wiki.archlinux.org/title/Hardware_video_acceleration)
 ## Pipewire
 
 Pipewire is a new low-level multimedia framework. It aims to offer capture and playback for both audio and video with
-minimal latency and support for PulseAudio, JACK, ALSA and GStreamer-based applications. It replaces PlulseAudio. You
-can check if your system is using it with:
+minimal latency and support for PulseAudio, JACK, ALSA and GStreamer-based applications. It replaces PlulseAudio. You can check if your system is using it with:
 
 ```bash
 $ pactl info
@@ -484,19 +526,7 @@ $ pactl info
 
 If it says `Server Name: PulseAudio (on PipeWire 0.3.32)` it means it's already installed.
 
-**Install Pipewire (Optional)**
-
-Install `pipewire` package and also install `pipewire-alsa`, `pipewire-jack`, `pipewire-media-session`,`pipewire-pulse`.
-
-```bash
-$ sudo pacman -S pipewire pipewire-{alsa,jack,media-session,pulse}
-```
-
-Reboot and check with `pactl info`.
-
-`pipewire-pulse` will replace `pulseaudio` and `pulseaudio-bluetooth`.
-
-Execute `systemctl status --user pipewire-pulse.service` to see the effect.
+Execute `systemctl status --user pipewire-pulse.service` to see the result.
 
 ## Respecting the regulatory domain
 
