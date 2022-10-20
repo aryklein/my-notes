@@ -484,8 +484,8 @@ To configure the regdomain, install `crda` package, edit `/etc/conf.d/wireless-r
 domain, then reboot and check with:
 
 ```bash
-sudo pacman -S crda
-sudo sed -i 's/^#\(.*\)\("US"\)/\1\2/' /etc/conf.d/wireless-regdom
+doas pacman -S crda
+doas sed -i 's/^#\(.*\)\("US"\)/\1\2/' /etc/conf.d/wireless-regdom
 ```
 
 Reboot and check:
