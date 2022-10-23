@@ -264,7 +264,9 @@ pacman -S intel-ucode \
 	  pipewire-{alsa,jack,pulse} \
 	  wireplumber \
 	  kitty \
-	  gst-libav
+	  gst-libav \
+	  ansible \
+	  ansible-lint
 ```
 
 ### Mirror List
