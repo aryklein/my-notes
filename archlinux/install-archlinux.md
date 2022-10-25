@@ -265,6 +265,7 @@ pacman -S intel-ucode \
 	  wireplumber \
 	  kitty \
 	  gst-libav \
+	  dmidecode \
 	  ansible \
 	  ansible-lint
 ```
