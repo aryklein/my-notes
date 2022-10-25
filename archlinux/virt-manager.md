@@ -8,7 +8,7 @@ It primarily targets KVM VMs.
 To install virt-manager on Linux you just need to execute:
 
 ```bash
-sudo pacman -S virt-manager dnsmasq
+sudo pacman -S virt-manager dnsmasq qemu-img qemu-system-x86
 ```
 `virt-manager` uses `libvirt` so you need to start `libvirtd.service` systemd unit.
 
