@@ -6,7 +6,7 @@ and start the `pcscd` service.
 The package `ccid` provides a generic USB interface driver for smart card reader.
 
 ```sh
-sudo pacman ccid
+sudo pacman -S ccid
 sudo systemctl start pcscd.service
 sudo systemctl enable pcscd.service
 ```
