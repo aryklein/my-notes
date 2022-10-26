@@ -15,5 +15,5 @@ For
 Install the following management tools:
 
 ```bash
-sudo pacman -Ss yubikey-manager yubikey-manager-qt
+sudo pacman -S yubikey-manager yubikey-manager-qt
 ```
