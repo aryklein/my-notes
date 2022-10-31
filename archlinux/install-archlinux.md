@@ -215,6 +215,12 @@ chown -c root:root /etc/doas.conf
 chmod -c 0400 /etc/doas.conf
 ```
 
+18) Enable NTP service:
+
+```bash
+doas timedatectl set-ntp true
+```
+
 ### Install basic packages
 
 (**note**: `intel-ucode` for intel `amd-ucode` for AMD)
