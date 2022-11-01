@@ -455,7 +455,8 @@ paru -S visual-studio-code-bin \
 	spotify \
 	tfswitch-bin \
 	wob \
-	ansible-language-server
+	ansible-language-server \
+	terraform-ls-bin
 ```
 
 ## Hardware video acceleration
