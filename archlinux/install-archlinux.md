@@ -418,7 +418,8 @@ go \
 gopls \
 pyright \
 xorg-xwayland \
-gnome-themes-extra
+gnome-themes-extra \
+aws-cli-v2
 ```
 
 Add your user to the video group to manage screen brightness:
@@ -450,7 +451,6 @@ paru -S visual-studio-code-bin \
 	zoom \
 	nerd-fonts-dejavu-complete \
 	nerd-fonts-noto-sans-mono \
-	aws-cli-v2-bin \
 	slack-electron \
 	spotify \
 	tfswitch-bin \
