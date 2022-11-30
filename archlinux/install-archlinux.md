@@ -411,6 +411,7 @@ papirus-icon-theme \
 cups \
 system-config-printer \
 nautilus \
+gvfs-mtp \
 eog \
 libappindicator-gtk3 \
 gtk4
