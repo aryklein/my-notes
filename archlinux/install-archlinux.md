@@ -414,7 +414,7 @@ nautilus \
 gvfs-mtp \
 eog \
 libappindicator-gtk3 \
-gtk4
+gtk4 \
 go \
 gopls \
 pyright \
