@@ -504,3 +504,18 @@ Reboot and check:
 ```bash
 iw reg get
 ```
+
+## GNOME/Keyring
+
+When using console-based login, edit `/etc/pam.d/login` and add `auth optional pam_gnome_keyring.so` at the end of the
+`auth` section and `session optional pam_gnome_keyring.so auto_start` at the end of the `session` section.
+
+```sh
+auth       required     pam_securetty.so
+auth       requisite    pam_nologin.so
+auth       include      system-local-login
+auth       optional     pam_gnome_keyring.so
+account    include      system-local-login
+session    include      system-local-login
+session    optional     pam_gnome_keyring.so auto_start
+```
