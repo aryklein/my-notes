@@ -368,6 +368,7 @@ blueberry \
 xdg-desktop-portal \
 xdg-desktop-portal-wlr \
 khal \
+kanshi \
 pavucontrol \
 foot \
 swaylock \
