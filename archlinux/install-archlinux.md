@@ -183,7 +183,7 @@ grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=arch_grub
 grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
-If Windows is installed in another partition, uncomment or add the `GRUB_DISABLE_OS_PROBER=false` in the 
+If Windows is installed in another partition, uncomment or add `GRUB_DISABLE_OS_PROBER=false` in the 
 `/etc/default/grub` file and re-run `grub-mkconfig -o /boot/grub/grub.cfg`.
 
 13) Install the following packages before rebooting:
