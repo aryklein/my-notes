@@ -234,50 +234,50 @@ Install the following basic packages:
 ```bash
 pacman -Syu
 pacman -S intel-ucode \
-          linux-firmware \
-          bash-completion \
-	  neovim \
-	  gopls \
-	  pyright \
-	  man-db \
-	  man-pages \
-	  base-devel \
-	  git \
-	  htop \
-	  bind-tools \
-	  tcpdump \
-	  reflector \
-	  tmux \
-	  zsh \
-	  zsh-completions \
-	  zsh-autosuggestions \
-	  zsh-syntax-highlighting \
-	  colordiff \
-	  python-virtualenv \
-	  python-pip \
-	  ipython \
-	  docker \
-	  docker-compose \
-	  cups \
-	  ntfs-3g \
-	  fzf \
-	  fd \
-	  ripgrep \
-	  stow \
-          bat \
-	  exa \
-	  usbutils \
-	  mtpfs \
-	  bluez \
-	  bluez-utils \
-	  pipewire \
-	  pipewire-{alsa,jack,pulse} \
-	  wireplumber \
-	  kitty \
-	  gst-libav \
-	  dmidecode \
-	  ansible \
-	  ansible-lint
+    linux-firmware \
+    bash-completion \
+    neovim \
+    gopls \
+    pyright \
+    man-db \
+    man-pages \
+    base-devel \
+    git \
+    htop \
+    bind-tools \
+    tcpdump \
+    reflector \
+    tmux \
+    zsh \
+    zsh-completions \
+    zsh-autosuggestions \
+    zsh-syntax-highlighting \
+    colordiff \
+    python-virtualenv \
+    python-pip \
+    ipython \
+    docker \
+    docker-compose \
+    cups \
+    ntfs-3g \
+    fzf \
+    fd \
+    ripgrep \
+    stow \
+    bat \
+    exa \
+    usbutils \
+    mtpfs \
+    bluez \
+    bluez-utils \
+    pipewire \
+    pipewire-{alsa,jack,pulse} \
+    wireplumber \
+    kitty \
+    gst-libav \
+    dmidecode \
+    ansible \
+    ansible-lint
 ```
 
 ### Mirror List
@@ -366,67 +366,68 @@ Install the following non-AUR packages:
 
 ```bash
 doas pacman -S sway \
-wofi \
-waybar \
-blueberry \
-xdg-desktop-portal \
-xdg-desktop-portal-wlr \
-khal \
-kanshi \
-pavucontrol \
-foot \
-swaylock \
-light \
-alacritty \
-grim \
-slurp \
-lxappearance \
-pcmanfm-gtk3 \
-qt5ct \
-qt5-wayland \
-qt6-wayland \
-lm_sensors \
-swayidle \
-swaybg \
-mako \
-flameshot \
-pulsemixer \
-qalculate-gtk \
-gnome-keyring \
-ttf-dejavu \
-ttf-hack \
-ttf-liberation \
-ttf-opensans \
-ttf-roboto \
-ttf-roboto-mono \
-noto-fonts \
-noto-fonts-emoji \
-libreoffice-still \
-hunspell-es_ar \
-hunspell-en_US \
-firefox \
-kubectl \
-gimp \
-obs-studio \
-youtube-dl \
-github-cli \
-mpv \
-android-udev \
-papirus-icon-theme \
-cups \
-system-config-printer \
-nautilus \
-gvfs-mtp \
-eog \
-libappindicator-gtk3 \
-gtk4 \
-go \
-gopls \
-pyright \
-xorg-xwayland \
-gnome-themes-extra \
-aws-cli-v2 \
-zsa-wally
+    wofi \
+    waybar \
+    blueberry \
+    xdg-desktop-portal \
+    xdg-desktop-portal-wlr \
+    khal \
+    kanshi \
+    pavucontrol \
+    foot \
+    swaylock \
+    light \
+    alacritty \
+    grim \
+    slurp \
+    lxappearance \
+    pcmanfm-gtk3 \
+    qt5ct \
+    qt5-wayland \
+    qt6-wayland \
+    lm_sensors \
+    swayidle \
+    swaybg \
+    mako \
+    flameshot \
+    pulsemixer \
+    qalculate-gtk \
+    gnome-keyring \
+    ttf-dejavu \
+    ttf-hack \
+    ttf-liberation \
+    ttf-opensans \
+    ttf-roboto \
+    ttf-roboto-mono \
+    noto-fonts \
+    noto-fonts-emoji \
+    libreoffice-still \
+    hunspell-es_ar \
+    hunspell-en_US \
+    firefox \
+    kubectl \
+    gimp \
+    obs-studio \
+    youtube-dl \
+    github-cli \
+    mpv \
+    android-udev \
+    papirus-icon-theme \
+    cups \
+    system-config-printer \
+    nautilus \
+    gvfs-mtp \
+    eog \
+    libappindicator-gtk3 \
+    gtk4 \
+    go \
+    gopls \
+    pyright \
+    xorg-xwayland \
+    gnome-themes-extra \
+    aws-cli-v2 \
+    zsa-wally \
+    swappy
 ```
 
 Add your user to the video group to manage screen brightness:
