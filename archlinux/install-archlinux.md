@@ -182,6 +182,10 @@ pacman -S grub efibootmgr os-prober intel-ucode
 grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=arch_grub
 grub-mkconfig -o /boot/grub/grub.cfg
 ```
+
+If Windows is installed in another partition, uncomment or add the `GRUB_DISABLE_OS_PROBER=false` in the 
+`/etc/default/grub` file and re-run `grub-mkconfig -o /boot/grub/grub.cfg`.
+
 13) Install the following packages before rebooting:
 
 ```bash
@@ -421,7 +425,8 @@ gopls \
 pyright \
 xorg-xwayland \
 gnome-themes-extra \
-aws-cli-v2
+aws-cli-v2 \
+zsa-wally
 ```
 
 Add your user to the video group to manage screen brightness:
