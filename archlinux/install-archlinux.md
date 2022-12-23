@@ -427,7 +427,9 @@ doas pacman -S sway \
     gnome-themes-extra \
     aws-cli-v2 \
     zsa-wally \
-    swappy
+    swappy \
+    kubectl \
+    helmfile
 ```
 
 Add your user to the video group to manage screen brightness:
@@ -464,7 +466,9 @@ paru -S visual-studio-code-bin \
 	tfswitch-bin \
 	wob \
 	ansible-language-server \
-	terraform-ls-bin
+	terraform-ls-bin \
+	helm-diff \
+	appimagelauncher
 ```
 
 ## Hardware video acceleration
