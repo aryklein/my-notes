@@ -238,7 +238,6 @@ pacman -S intel-ucode \
     bash-completion \
     neovim \
     gopls \
-    pyright \
     man-db \
     man-pages \
     base-devel \
@@ -421,7 +420,6 @@ doas pacman -S sway \
     libappindicator-gtk3 \
     gtk4 \
     go \
-    gopls \
     pyright \
     xorg-xwayland \
     gnome-themes-extra \
@@ -465,8 +463,6 @@ paru -S visual-studio-code-bin \
 	spotify \
 	tfswitch-bin \
 	wob \
-	ansible-language-server \
-	terraform-ls-bin \
 	helm-diff \
 	appimagelauncher
 ```
