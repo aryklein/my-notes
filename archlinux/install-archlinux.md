@@ -398,6 +398,7 @@ doas pacman -S sway \
     ttf-opensans \
     ttf-roboto \
     ttf-roboto-mono \
+    ttf-hack-nerd \
     noto-fonts \
     noto-fonts-emoji \
     libreoffice-still \
