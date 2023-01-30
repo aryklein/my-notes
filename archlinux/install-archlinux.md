@@ -399,6 +399,8 @@ doas pacman -S sway \
     ttf-roboto \
     ttf-roboto-mono \
     ttf-hack-nerd \
+    ttf-noto-nerd \
+    ttf-dejavu-nerd
     noto-fonts \
     noto-fonts-emoji \
     libreoffice-still \
@@ -458,8 +460,6 @@ paru -S visual-studio-code-bin \
         nautilus-dropbox \
         teamviewer \
 	zoom \
-	nerd-fonts-dejavu-complete \
-	nerd-fonts-noto-sans-mono \
 	slack-electron \
 	spotify \
 	tfswitch-bin \
