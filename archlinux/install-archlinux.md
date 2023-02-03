@@ -430,7 +430,8 @@ doas pacman -S sway \
     zsa-wally \
     swappy \
     kubectl \
-    helmfile
+    helmfile \
+    transmission-gtk
 ```
 
 Add your user to the video group to manage screen brightness:
