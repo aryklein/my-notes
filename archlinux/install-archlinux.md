@@ -276,7 +276,8 @@ pacman -S intel-ucode \
     gst-libav \
     dmidecode \
     ansible \
-    ansible-lint
+    ansible-lint \
+    sysstat
 ```
 
 ### Mirror List
