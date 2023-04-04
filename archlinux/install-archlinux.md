@@ -277,7 +277,8 @@ pacman -S intel-ucode \
     dmidecode \
     ansible \
     ansible-lint \
-    sysstat
+    sysstat \
+    nmap
 ```
 
 ### Mirror List
@@ -366,7 +367,7 @@ Install the following non-AUR packages:
 
 ```bash
 doas pacman -S sway \
-    wofi \
+    fuzzel \
     waybar \
     blueberry \
     xdg-desktop-portal \
