@@ -278,7 +278,8 @@ pacman -S intel-ucode \
     ansible \
     ansible-lint \
     sysstat \
-    nmap
+    nmap \
+    freerdp
 ```
 
 ### Mirror List
